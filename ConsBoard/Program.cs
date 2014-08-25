@@ -57,8 +57,12 @@ namespace ConsoleApplication1
             }
             
             
-                Rook r = new Rook(FigureColor.White);
-                board.AddFigure(r,i,
+            Rook r = new Rook(FigureColor.White);// добавлена ладья
+            board.AddFigure(r, 0, 0);
+            board.AddFigure(r, 0, 7);
+            r = new Rook(FigureColor.Black);
+            board.AddFigure(r, 7, 0);
+            board.AddFigure(r, 7, 7);
             
             //board[0,0]=board[0,7]=2;//Ладья
             //board[7,0]=board[7,7]=-2;
