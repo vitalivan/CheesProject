@@ -69,16 +69,56 @@ namespace ConsoleApplication1
             //board[0,0]=board[0,7]=2;//Ладья
             //board[7,0]=board[7,7]=-2;
         }
-        static bool CheckMove(int i1, int j1, int i2, int j2)
+        static bool CheckMove(Move move,FigureColor currentPlayerColor)
         {
-            if (brd[] != null)
+            if (brd[move.ColFrom,move.RowFrom] == null)
             {
-                
+                return false;  
+            }
+            FigureColor colorFrom;
+            //Принадлежит ли фигура игроку
+            object figure=brd[move.ColFrom,move.RowFrom];
+            if(figure is Rook)
+            {
+                colorFrom = (figure as Rook).Color;
+            }
+            else if (figure is Pawn)
+            {
+                colorFrom = (figure as Pawn).Color;
             }
             else
             {
+                throw new ApplicationException("Unknown figure type");
+            }
+            if (colorFrom != currentPlayerColor)
+            {
                 return false;
-            } 
+            }
+
+            //Проверка, ходит ли фигура таким образом
+            object fig2 = brd[move.ColTo, move.RowTo];
+            if (fig2 != null)
+            {
+                FigureColor colorTo;
+                if (fig2 is Rook)
+                {
+                    colorTo = (fig2 as Rook).Color;
+                }
+                else if (fig2 is Pawn)
+                {
+                    colorTo = (fig2 as Pawn).Color;
+                }
+                else
+                {
+                    throw new ApplicationException("Unknown figure type");
+                }
+                if (colorFrom == colorTo)
+                {
+                    return false;
+                }
+            }
+            return true;
+
         }
 
         static void Main(string[] args)
