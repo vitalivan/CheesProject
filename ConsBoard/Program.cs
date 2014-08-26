@@ -9,8 +9,9 @@ namespace ConsoleApplication1
     {
         static int[,] board;
         static Board brd;
-        static void ReadMove(out int iFrom, out int jFrom, out int iTo, out int jTo)
+        static Move ReadMove()
         {
+            int iFrom,jFrom,iTo,jTo;
             iFrom = 0;
             jFrom = 0;
             iTo = 0;
@@ -44,6 +45,7 @@ namespace ConsoleApplication1
                     continue;
                 }
             }while(reading);
+            return new Move(iFrom, jFrom, iTo, jTo);
         }
         static void PlaceFigures(Board board)
         {
@@ -69,7 +71,7 @@ namespace ConsoleApplication1
         }
         static bool CheckMove(int i1, int j1, int i2, int j2)
         {
-            if (brd[i1, j1] != null)
+            if (brd[] != null)
             {
                 
             }
@@ -95,6 +97,8 @@ namespace ConsoleApplication1
             }
             
             
+            
+           
             
             board = new int[8, 8];
             for (int i = 0; i < 8; i++)
