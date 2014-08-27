@@ -37,6 +37,7 @@ namespace ConsoleApplication1
                     if (jFrom < 0 || jFrom > 7) continue;
                     if (iTo < 0 || iTo > 7) continue;
                     if (jTo < 0 || jTo > 7) continue;
+                   
                     reading = false;
                 }
                 catch
@@ -44,6 +45,7 @@ namespace ConsoleApplication1
                     Console.WriteLine("Enter 4 numbers ");
                     continue;
                 }
+           
             }while(reading);
             return new Move(iFrom, jFrom, iTo, jTo);
         }
@@ -96,6 +98,22 @@ namespace ConsoleApplication1
             }
 
             //Проверка, ходит ли фигура таким образом
+            if (figure is Rook)
+            {
+                if ((figure as Rook).CheckMove(move) == false)
+                    return false;
+            }
+            else if (figure is Pawn)
+            {
+                if ((figure as Pawn).CheckMove(move, brd) == false)
+                    return false;
+            }
+            else
+            {
+                throw new ApplicationException("Unknown figure type");
+            }
+            // Конец проверки, ходит ли фигура таким образом
+           
             object fig2 = brd[move.ColTo, move.RowTo];
             if (fig2 != null)
             {
@@ -125,18 +143,31 @@ namespace ConsoleApplication1
         {
             brd = new Board(8, 8);
             PlaceFigures(brd);
+            FigureColor currentPlayerColor = FigureColor.White;
 
             int i1, j1, i2, j2;
-            ReadMove(out i1, out j1, out i2, out j2);
 
 
-            if (CheckMove(i1, j1, i2, j2))
+            Move move;
+
+            while (true)
             {
-                
+                brd.PrintBoard();
 
+                move = ReadMove();
+                if (CheckMove(move, currentPlayerColor))
+                {
+                    brd.ApplyMove(move);
+                }
+                if (currentPlayerColor == FigureColor.White)
+                    currentPlayerColor = FigureColor.Black;
+                else
+                    currentPlayerColor = FigureColor.White;
             }
-            
-            
+            i1 = move.ColFrom;
+            j1 = move.RowFrom;
+            i2 = move.ColTo;
+            j2 = move.RowTo;
             
            
             
@@ -161,12 +192,18 @@ namespace ConsoleApplication1
                 }
 
 
-                int i1, j1, i2, j2;
+                
                 bool reading = true;
                 
                 do
                 {
-                    ReadMove(out i1, out j1, out i2, out j2);
+                    move = ReadMove();
+
+                    i1 = move.ColFrom;
+                    j1 = move.RowFrom;
+                    i2 = move.ColTo;
+                    j2 = move.RowTo;
+
 
                     if (board[j1, i1] == 0)
                     {

@@ -40,7 +40,8 @@ namespace ConsoleApplication1
         public int RowTo
         {
             get { return RowTo; }
-            set { RowTo = value; }
+            set { RowTo = value;}
+            
         }
 
     }

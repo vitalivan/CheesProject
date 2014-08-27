@@ -29,9 +29,23 @@ namespace ConsoleApplication1
             set { row = value; }
         }
 
-        public bool CheckMove(Move m)
+        public bool CheckMove(Move m,Board b)
         {
-            throw new NotImplementedException();
+            if (m.ColFrom != m.ColTo)
+            {
+                return false;
+            }
+            if (Color == FigureColor.White)
+            {
+                if (m.RowTo - m.RowFrom != 1) return false;
+            }
+            else
+            {
+                if (m.RowTo - m.RowFrom != -1) return false;
+            }
+            if (b[m.ColTo, m.RowTo] != null) return false;
+
+            return true;
         }
     
     }
