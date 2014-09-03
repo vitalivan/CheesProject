@@ -6,7 +6,7 @@ using System.Text;
 namespace ConsoleApplication1
 {
     enum FigureColor { Black,White}
-    static struct Move 
+      class Move
     {
         public Move(int colFrom, int rowFrom, int colTo, int rowTo)
         {

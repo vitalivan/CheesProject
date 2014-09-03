@@ -29,9 +29,35 @@ namespace ConsoleApplication1
             set { row = value; }
         }
 
-        public bool CheckMove(Move m)
+        public bool CheckMove(Move m, Board board)
         {
-            throw new NotImplementedException();
+
+            if (m.ColFrom != m.ColTo && m.RowFrom != m.RowFrom)
+            {
+                return false;
+            }
+
+
+            if (m.ColFrom == m.ColTo)
+            {
+                int a = Math.Min(m.RowFrom, m.RowTo);
+                int b = Math.Max(m.RowFrom, m.RowTo);
+                for (int jx = a + 1; jx < b; jx++)
+                {
+                    if (board[m.ColFrom, jx] != null) return false;
+                }
+            }
+            else
+            {
+                int a = Math.Min(m.ColFrom, m.ColTo);
+                int b = Math.Max(m.ColFrom, m.ColTo);
+                for (int ix = a + 1; ix < b; ix++)
+                {
+                    if (board[ix, m.RowFrom] != null) return false;
+                }
+            }
+            return true;
+
         }
     }
 }

@@ -100,7 +100,7 @@ namespace ConsoleApplication1
             //Проверка, ходит ли фигура таким образом
             if (figure is Rook)
             {
-                if ((figure as Rook).CheckMove(move) == false)
+                if ((figure as Rook).CheckMove(move,brd) == false)
                     return false;
             }
             else if (figure is Pawn)
