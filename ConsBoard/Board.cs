@@ -44,6 +44,11 @@ namespace ConsoleApplication1
                 (figure as Pawn).Row = move.RowTo;
                 (figure as Pawn).Column = move.ColTo;
             }
+            else if (figure is Bishop)
+            {
+                (figure as Bishop).Row = move.RowTo;
+                (figure as Bishop).Column = move.ColTo;
+            }
             else
             {
                 throw new ApplicationException("Unknown figure type");
@@ -64,6 +69,11 @@ namespace ConsoleApplication1
                 (figure as Pawn).Row = row;
                 (figure as Pawn).Column = col;
             }
+            else if (figure is Bishop)
+            {
+                (figure as Bishop).Row = row;
+                (figure as Bishop).Column = col;
+            }
             else
             {
                 throw new ApplicationException("Unknown figure type");
@@ -72,34 +82,54 @@ namespace ConsoleApplication1
 
         internal void PrintBoard()
         {
-            for (int j = Rows - 1; j >= 0; j--)
+            for (int j = Rows-1; j >= 0; j--)
             {
                 for (int i = 0; i < Columns; i++)
                 {
                     string sym = "";
+                    
                     object figure = board[i, j];
-                    if (figure is Rook)
+
+                    if (figure == null)
                     {
-                        sym = "R";
-                        FigureColor color = (figure as Rook).Color;
-                        if (color == FigureColor.Black)
-                            sym = sym + "b";
-                        else
-                            sym = sym + "w";
-                    }
-                    else if (figure is Pawn)
-                    {
-                        sym = "P";
-                        FigureColor color = (figure as Pawn).Color;
-                        if (color == FigureColor.Black)
-                            sym = sym + "b";
-                        else
-                            sym = sym + "w";
+                        sym = "__";
                     }
                     else
                     {
-                        throw new ApplicationException("Unknown figure type");
+                        if (figure is Rook)
+                        {
+                            sym = "R";
+                            FigureColor color = (figure as Rook).Color;
+                            if (color == FigureColor.Black)
+                                sym = sym + "b";
+                            else
+                                sym = sym + "w";
+                        }
+                        else if (figure is Pawn)
+                        {
+                            sym = "P";
+                            FigureColor color = (figure as Pawn).Color;
+                            if (color == FigureColor.Black)
+                                sym = sym + "b";
+                            else
+                                sym = sym + "w";
+                        }
+                        else if (figure is Bishop)
+                        {
+                            sym = "B";
+                            FigureColor color = (figure as Bishop).Color;
+                            if (color == FigureColor.Black)
+                                sym = sym + "b";
+                            else
+                                sym = sym + "w";
+                        }
+
+                        else
+                        {
+                            throw new ApplicationException("Unknown figure type");
+                        }
                     }
+
                     Console.Write(sym + " ");
                 }
                 Console.WriteLine();
