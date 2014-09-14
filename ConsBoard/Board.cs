@@ -7,18 +7,18 @@ namespace ConsoleApplication1
 {
     class Board
     {
-        object[,] board;
+        Figure[,] board;
         public int Columns { get; private set; }
         public int Rows { get; private set; }
 
         public Board(int cols, int rows)
         { 
-            board=new object[cols,rows];
+            board=new Figure[cols,rows];
             Columns = cols;
             Rows = rows;
         }
 
-        public object this[int col, int row]
+        public Figure this[int col, int row]
         {
             get { return board[col,row];}
         }
@@ -33,51 +33,20 @@ namespace ConsoleApplication1
             board[move.ColTo,move.RowTo]=board[move.ColFrom,move.RowFrom];
             board[move.ColFrom,move.RowFrom]=null;
 
-            object figure=board[move.ColTo,move.RowTo];
-            if (figure is Rook)
-            {
-                (figure as Rook).Row=move.RowTo;
-                (figure as Rook).Column=move.ColTo;
-            }
-            else if (figure is Pawn)
-            {
-                (figure as Pawn).Row = move.RowTo;
-                (figure as Pawn).Column = move.ColTo;
-            }
-            else if (figure is Bishop)
-            {
-                (figure as Bishop).Row = move.RowTo;
-                (figure as Bishop).Column = move.ColTo;
-            }
-            else
-            {
-                throw new ApplicationException("Unknown figure type");
-            }
+            Figure figure=board[move.ColTo,move.RowTo];
+            figure.Row = move.RowTo;
+            figure.Column = move.ColTo;
+           
         }
         
-        public void AddFigure(object figure, int col, int row)
+        public void AddFigure(Figure figure, int col, int row)
         {
             board[col,row]=figure;
 
-            if (figure is Rook)
-            {
-                (figure as Rook).Row = row;
-                (figure as Rook).Column = col;
-            }
-            else if (figure is Pawn)
-            {
-                (figure as Pawn).Row = row;
-                (figure as Pawn).Column = col;
-            }
-            else if (figure is Bishop)
-            {
-                (figure as Bishop).Row = row;
-                (figure as Bishop).Column = col;
-            }
-            else
-            {
-                throw new ApplicationException("Unknown figure type");
-            }
+            figure.Row = row;
+            figure.Column = col;
+
+         
         }
 
         internal void PrintBoard()
