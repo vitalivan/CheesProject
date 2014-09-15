@@ -12,6 +12,11 @@ namespace ConsoleApplication1
             
         }
 
+        public override string Symbol
+        {
+            get { return "B"; }
+        }
+
         public override bool CheckMove(Move m, Board board)//переопределение метода 
         {
             //throw new NotImplementedException();

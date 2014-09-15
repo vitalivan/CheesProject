@@ -101,26 +101,7 @@ namespace ConsoleApplication1
            //Проверка, ходит ли фигура таким образом
             if (figure.CheckMove(move, brd) == false)
                 return false;
-           /* if (figure is Rook)
-            {
-                if ((figure as Rook).CheckMove(move,brd) == false)
-                    return false;
-            }
-            else if (figure is Pawn)
-            {
-                if ((figure as Pawn).CheckMove(move, brd) == false)
-                    return false;
-            }
-            else if (figure is Bishop)
-            {
-                if ((figure as Bishop).CheckMove(move, brd) == false)
-                    return false;
-            }
-            else
-            {
-                throw new ApplicationException("Unknown figure type");
-            }*/
-            // Конец проверки, ходит ли фигура таким образом
+         
            
             Figure fig2 = brd[move.ColTo, move.RowTo];
             if (fig2 != null)

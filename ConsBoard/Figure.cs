@@ -11,10 +11,16 @@ namespace ConsoleApplication1
         {
             this.color = color;
         }
+
         FigureColor color;
         public FigureColor Color
         {
             get { return color; }
+        }
+
+        abstract public string Symbol
+        {
+            get;
         }
         int col;
         public int Column

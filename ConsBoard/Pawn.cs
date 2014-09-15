@@ -10,6 +10,11 @@ namespace ConsoleApplication1
         public Pawn(FigureColor color):base(color)
         {   
         }
+
+        public override string Symbol
+        {
+            get { return "P"; }
+        }
         
         public override bool CheckMove(Move m,Board b)
         {
